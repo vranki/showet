@@ -4,19 +4,19 @@ Demo viewer using Pouet.net's metadata
 
 Consider this "MAME for demos"
 
-##Idea
+## Idea
 * Browse and search demos using pouet.net's database
 * Select a demo, it will be downloaded and set up
 * Easily run the demo natively or using emulator or wine
-* Support windows .exe (wine), Amiga (UAE), C64 (Vice) etc demos
+* Support at least windows .exe (wine), Amiga (UAE), C64 (Vice) demos
 * Smart autodetection as far as possible
-* When autodetection fails, allow per-demo metadata to define how it should be run
+* Support per-demo metadata to define how it should be run if autodetection fails
 
-##Current implementation
+## Current implementation
 * Proof of concept python script that can download & run demos
 * Supported platforms: windows .exe
 
-##Example
+## Example
 
 To see MFX's Deities (http://www.pouet.net/prod.php?which=24487) 
 
@@ -33,7 +33,7 @@ sudo apt install python3 unzip wine
 ```
 In future debian packaging should handle these
 
-##Todo
+## Todo
 
 - [x] Proof of concept
 - [x] Windows support
