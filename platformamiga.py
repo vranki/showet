@@ -3,13 +3,17 @@ import os
 
 class PlatformAmiga(PlatformCommon):
     def run(self):
+        adfs = self.find_files_with_extension('adf')
         dmss = self.find_files_with_extension('dms')
-        if len(dmss) == 0:
-            print("Didn't find any dms files.")
+        if len(dmss) == 0 and len(adfs) == 0:
+            print("Didn't find any dms or adf files.")
             exit(-1)
 
         # Support only one for now..
-        drive_0 = dmss[0]
+        if len(dmss) > 0:
+            drive_0 = dmss[0]
+        elif len(adfs) > 0:
+            drive_0 = adfs[0]
 
         amiga_model = 'A1200'
         if self.prod_platform == 'amigaocsecs':
