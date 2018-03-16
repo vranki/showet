@@ -2,19 +2,31 @@ import os
 import os.path
 
 class PlatformCommon:
+    prod_files = []
+
     def __init__(self):
         self.datadir = None
         self.prod_platform = None
 
+    def find_files_recursively(self,path):
+        entries = [os.path.join(path,i) for i in os.listdir(path)]
+        if len(entries) == 0:
+                return
+
+        for e in entries:
+            if os.path.isfile(e):
+                self.prod_files.append(os.path.realpath(e))
+            elif os.path.isdir(e):
+                self.find_files_recursively(e)
+
     def setup(self, datadir, prod_platform):
         self.datadir = datadir
         self.prod_platform = prod_platform
+        self.find_files_recursively(self.datadir)
 
     def supported_platforms(self):
         return None
 
     def find_files_with_extension(self, extension):
-        files = [f for f in os.listdir(self.datadir) if os.path.isfile(os.path.join(self.datadir, f))]
-
-        foundfiles = [f for f in files if (f.lower().endswith(extension) or f.lower().endswith(extension))]
+        foundfiles = [f for f in self.prod_files if (f.lower().endswith(extension) or f.lower().endswith(extension))]
         return foundfiles
