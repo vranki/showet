@@ -15,7 +15,7 @@ class PlatformAmiga(PlatformCommon):
         if self.prod_platform == 'amigaocsecs':
             amiga_model = 'A500'
 
-        fsuae_opts = '--fullscreen --floppy_drive_0=' + drive_0 + ' --amiga_model=' + amiga_model
+        fsuae_opts = '--fullscreen --keep_aspect --floppy_drive_0=' + drive_0 + ' --amiga_model=' + amiga_model
         print("Running fs-uae with options: " + fsuae_opts)
         os.chdir(self.datadir)
         os.system('fs-uae ' + fsuae_opts)
