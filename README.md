@@ -41,7 +41,7 @@ In future debian packaging should handle these
 
 For Amiga demos you'll need kickstart rom files. See
 http://fs-uae.net/docs/kickstarts on how to obtain and install those.
-Only DMS packed single disk demos are supported for now.
+Only DMS and ADF packed single disk demos are supported for now.
 
 ## Todo
 
