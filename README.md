@@ -16,21 +16,21 @@ Developed on Ubuntu 17.10, other platforms may work.
 
 ## Current implementation
 * Proof of concept python script that can download & run demos
-* Supported platforms: windows .exe, Amiga (.dms)
+* Supported platforms: windows .exe, Amiga (.adf, .dms, .lha)
 
-## Example
+## Examples
 
-To see MFX's Deities (http://www.pouet.net/prod.php?which=24487) 
-
-Run:
-
+Windows: MFX's Deities (http://www.pouet.net/prod.php?which=24487) 
 ```
 ./showet.py 24487
 ```
-
-To see Origin by Complex (http://www.pouet.net/prod.php?which=3741)
+Amiga/dms Origin by Complex (http://www.pouet.net/prod.php?which=3741)
 ```
 ./showet.py 3741
+```
+Amiga/lha Tint by TBL (http://www.pouet.net/prod.php?which=701)
+```
+./showet.py 701
 ```
 
 Make sure you have dependencies installed:
