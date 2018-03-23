@@ -1,0 +1,30 @@
+Source: showet
+Section: base
+Priority: optional
+Maintainer: Ville Ranki <ville.ranki@iki.fi>
+Uploaders: Ville Ranki <ville.ranki@iki.fi>
+Build-Depends: debhelper (>= 9),
+               qt5-qmake,
+               qtbase5-dev,
+               libqt5quickcontrols2-5
+Standards-Version: 3.9.8
+Homepage: https://github.com/vranki/showet
+Vcs-Git: https://github.com/vranki/showet.git
+Vcs-Browser: https://github.com/vranki/showet
+X-Python3-Version: >= 3.3
+Description: pouet.net demo jukebox
+ Play demos from pouet.net easily.
+
+
+Package: showet
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, 
+         python3, 
+         python3-urllib3,
+         unzip, 
+         wine, 
+         fs-uae, 
+         lhasa
+Description: pouet.net demo jukebox
+ Play demos from pouet.net easily.
+

@@ -8,7 +8,7 @@ from platformamiga import PlatformAmiga
 # Note: This is still early proof of concept, but seems to work.
 
 if len(sys.argv) != 2:
-    print("Usage: ./shouet.py <pouet id>")
+    print("Usage: ./showet.py <pouet id>")
     exit(-1)
 
 prod_id = int(sys.argv[1])

@@ -17,6 +17,7 @@ Developed on Ubuntu 17.10, other platforms may work.
 ## Current implementation
 * Proof of concept python script that can download & run demos
 * Supported platforms: windows .exe, Amiga (.adf, .dms, .lha)
+* WIP Qt based gui
 
 ## Examples
 
@@ -33,15 +34,16 @@ Amiga/lha Tint by TBL (http://www.pouet.net/prod.php?which=701)
 ./showet.py 701
 ```
 
-Make sure you have dependencies installed:
+To build debian package, run:
 ```
-sudo apt install python3 unzip wine fs-uae lhasa
+debuild -us -uc -b
 ```
-In future debian packaging should handle these
+Install the package to get dependencies.
 
 For Amiga demos you'll need kickstart rom files. See
 http://fs-uae.net/docs/kickstarts on how to obtain and install those.
-Only DMS and ADF packed single disk demos are supported for now.
+Setup fs-uae default settings to your liking - it'll be used as
+base for launching amiga demos.
 
 ## Todo
 
@@ -55,7 +57,7 @@ Only DMS and ADF packed single disk demos are supported for now.
 - [x] LhA decompress
 - [ ] Design metadata format to fix non-working demos
 - [ ] Disk change support (C64/Amiga)
-- [ ] debian packaging
+- [x] debian packaging
 - [ ] Whitelist & blacklist of known working & broken demos
 
 Pull requests welcome, although this is still in very early development.
