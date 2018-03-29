@@ -1,14 +1,19 @@
 #include "showethelper.h"
 #include <QDebug>
 #include <QFile>
+#include <QtGlobal>
 
 ShowetHelper::ShowetHelper(QObject *parent) : QObject(parent)
   , m_running(false)
 {
     connect(&showetProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
             this, SLOT(processFinished(int, QProcess::ExitStatus)));
+    connect(this, SIGNAL(runError(QString)),
+            this, SLOT(printRunError(QString)));
+#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
     connect(&showetProcess, SIGNAL(errorOccurred(QProcess::ProcessError)),
             this, SLOT(processErrorOccurred(QProcess::ProcessError)));
+#endif
 }
 
 void ShowetHelper::runDemo(const unsigned int id) {
@@ -36,16 +41,20 @@ void ShowetHelper::processFinished(int exitCode, QProcess::ExitStatus exitStatus
 
     if(exitCode != 0) {
         QString err = showetProcess.readAll();
-        qDebug() << Q_FUNC_INFO << err;
         emit runError(err);
     }
 }
 
 void ShowetHelper::processErrorOccurred(QProcess::ProcessError error)
 {
+    Q_UNUSED(error);
     QString err = showetProcess.readAll();
-    qDebug() << Q_FUNC_INFO << err << error;
     m_running = false;
     emit runningChanged(m_running);
     emit runError(err);
+}
+
+void ShowetHelper::printRunError(QString errorText)
+{
+    qWarning() << Q_FUNC_INFO << errorText;
 }

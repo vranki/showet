@@ -26,6 +26,7 @@ Depends: ${misc:Depends}, ${python:Depends},
          fs-uae, 
          lhasa,
          qml-module-qtquick-controls,
-         qml-module-qtgraphicaleffects
+         qml-module-qtgraphicaleffects,
+         qml-module-qtquick-layouts
 Description: pouet.net demo jukebox
  Play demos from pouet.net easily.

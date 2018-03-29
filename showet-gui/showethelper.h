@@ -23,6 +23,7 @@ public slots:
 private slots:
     void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
     void processErrorOccurred(QProcess::ProcessError error);
+    void printRunError(QString errorText);
 private:
     QProcess showetProcess;
     bool m_running;
