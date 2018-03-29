@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlEngine>
+#include <QtQml>
 #include "showethelper.h"
 
 int main(int argc, char *argv[])
