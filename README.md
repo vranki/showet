@@ -6,6 +6,8 @@ Consider this "MAME for demos"
 
 Developed on Ubuntu 17.10, other platforms may work.
 
+![Screenshot](screenshot.png?raw=true "Screenshot of the GUI")
+
 ## Idea
 * Browse and search demos using pouet.net's database
 * Select a demo, it will be downloaded and set up
