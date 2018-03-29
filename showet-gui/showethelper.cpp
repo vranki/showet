@@ -23,14 +23,10 @@ void ShowetHelper::runDemo(const unsigned int id) {
     if(!showetFile.exists()) {
         showetFile.setFileName("showet"); // In path
     }
-    if(showetFile.exists()) {
-        qDebug() << Q_FUNC_INFO << "Starting showet binary " << showetFile.fileName() << " with args " << args << "..";
-        showetProcess.start(showetFile.fileName(), args);
-        m_running = true;
-        emit runningChanged(m_running);
-    } else {
-        emit runError("Can't find showet.py to run!");
-    }
+    qDebug() << Q_FUNC_INFO << "Starting showet binary " << showetFile.fileName() << " with args " << args << "..";
+    m_running = true;
+    emit runningChanged(m_running);
+    showetProcess.start(showetFile.fileName(), args);
 }
 
 void ShowetHelper::processFinished(int exitCode, QProcess::ExitStatus exitStatus)
