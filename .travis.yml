@@ -1,0 +1,26 @@
+language: cpp
+compiler:
+- gcc
+before_install:
+- sudo apt-get update -qq
+- sudo apt-get install -qq debhelper qtbase5-dev qt5-default qt5-qmake cdbs devscripts
+  qtdeclarative5-dev
+script: debuild -i -us -uc -b
+branches:
+  only:
+  - master
+notifications:
+  recipients:
+  - ville.ranki@iki.fi
+  email:
+    on_success: change
+    on_failure: always
+deploy:
+  provider: releases
+  api_key:
+    secure: Q4FbX3NsP4hh+DmvjknYybkmDsyT5xswxKfXRfdYgQW3/4pPHnbuZgCMKieVrzLMT0Ot6V7g5n5x+SSXVqU628W9o2oUSg6THMgT0t/ZLHWPHw8tU1iI31yDY8Vdrz9iLBQ+/nL+vEnV3fBtP/peYSN4nw8lX29+ivMHA55gcKgpv8WVYflhC2XxJbMzKGF3JVnnT8klnThJTI/yQ4ucvnIEVwA0cdfOlOKqMM61hAGJ+29jHvWQl9uPppxS2VAWA7qMt0a2zSaE0bE9cAxjI79qXy/+T5T3H32Y0tlwplPSeqZdWEh0FYLAEiRGNoeteVKB+erjjVBLGGNXW5y8Zd9uZPzVpHM7ACSPVigLyeQSNzoBFdDMfdcVOnSlZtBH7zBzighTdTXarLoumE995EcFFoxXDGNn2cIb++NTNBl/y2PBuGFVIJshe7BP3OEkLbV3GnO3woVTW2pHKg0Qm/CvExvr5btwZywbez9FS9p57auK94Qs/jcr8xl4mHVhXA83t0o6+U2Klcjn5axoYQeeN3DYY42FYspCinUmjEFOYzXcgU/1VUp30Kpg/yCJqUBs26m6qHudduVYGhz9n1iDJoiS6lIQ9Ad+EMltd3tDpvR5YdP/KYEXlss9u8ptFUAoGpqZbXybcEGScBW9gwoiPnwEVMf+l8dPG3twF+A=
+  file: "../showet*.deb"
+  file_glob: true
+  on:
+    repo: vranki/showet
+

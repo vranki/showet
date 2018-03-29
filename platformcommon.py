@@ -5,11 +5,12 @@ class PlatformCommon:
     prod_files = []
 
     def __init__(self):
+        self.showetdir = None
         self.datadir = None
         self.prod_platform = None
 
 # TODO: Change this to be relative to datadir
-    def find_files_recursively(self,path):
+    def find_files_recursively(self, path):
         entries = [os.path.join(path,i) for i in os.listdir(path)]
         if len(entries) == 0:
                 return
@@ -20,7 +21,8 @@ class PlatformCommon:
             elif os.path.isdir(e):
                 self.find_files_recursively(e)
 
-    def setup(self, datadir, prod_platform):
+    def setup(self, showetdir, datadir, prod_platform):
+        self.showetdir = showetdir
         self.datadir = datadir
         self.prod_platform = prod_platform
         self.find_files_recursively(self.datadir)

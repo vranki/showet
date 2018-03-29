@@ -6,7 +6,7 @@ Uploaders: Ville Ranki <ville.ranki@iki.fi>
 Build-Depends: debhelper (>= 9),
                qt5-qmake,
                qtbase5-dev,
-               libqt5quickcontrols2-5
+               qtdeclarative5-dev
 Standards-Version: 3.9.8
 Homepage: https://github.com/vranki/showet
 Vcs-Git: https://github.com/vranki/showet.git
@@ -24,7 +24,8 @@ Depends: ${misc:Depends}, ${python:Depends},
          unzip, 
          wine, 
          fs-uae, 
-         lhasa
+         lhasa,
+         qml-module-qtquick-controls,
+         qml-module-qtgraphicaleffects
 Description: pouet.net demo jukebox
  Play demos from pouet.net easily.
-

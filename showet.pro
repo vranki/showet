@@ -1,9 +1,12 @@
 TEMPLATE = subdirs
 SUBDIRS = showet-gui
 
-support.path = /usr/bin
-support.files = showet.py
+executable.path = /usr/bin
+executable.files = showet
 
-INSTALLS += support
+pymodules.path = /usr/lib/python3/dist-packages/showet
+pymodules.files = *.py
 
-OTHER_FILES += debian/control
+INSTALLS += executable pymodules
+
+OTHER_FILES += debian/control README.md showet-gui.desktop *.py

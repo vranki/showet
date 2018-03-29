@@ -17,21 +17,27 @@ Developed on Ubuntu 17.10, other platforms may work.
 ## Current implementation
 * Proof of concept python script that can download & run demos
 * Supported platforms: windows .exe, Amiga (.adf, .dms, .lha)
-* WIP Qt based gui
+* Qt based GUI frontend
 
-## Examples
+## Usage
+
+* Install the debian package (hopefully available in github releases).
+* Launch showet from menu
+* Search for a production and click run to run it
+
+## Command line examples
 
 Windows: MFX's Deities (http://www.pouet.net/prod.php?which=24487) 
 ```
-./showet.py 24487
+./showet 24487
 ```
 Amiga/dms Origin by Complex (http://www.pouet.net/prod.php?which=3741)
 ```
-./showet.py 3741
+./showet 3741
 ```
 Amiga/lha Tint by TBL (http://www.pouet.net/prod.php?which=701)
 ```
-./showet.py 701
+./showet 701
 ```
 
 To build debian package, run:
@@ -52,7 +58,8 @@ base for launching amiga demos.
 - [x] Amiga support
 - [ ] C64 support
 - [ ] DOS support
-- [ ] GUI
+- [ ] Linux support
+- [x] GUI
 - [x] unzip decompress
 - [x] LhA decompress
 - [ ] Design metadata format to fix non-working demos

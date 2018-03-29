@@ -4,7 +4,7 @@ import os.path
 
 class PlatformWindows(PlatformCommon):
     def run(self):
-        wineprefix = os.getcwd() + '/wineprefix'
+        wineprefix = self.showetdir + '/wineprefix'
 
         exefiles = self.find_files_with_extension('exe')
 

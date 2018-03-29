@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 import urllib.request, json
 import os
 import sys
@@ -11,6 +11,11 @@ if len(sys.argv) != 2:
     print("Usage: ./showet.py <pouet id>")
     exit(-1)
 
+showetdir = os.path.expanduser("~/.showet")
+
+if not os.path.exists(showetdir):
+    os.makedirs(showetdir)
+
 prod_id = int(sys.argv[1])
 
 if(prod_id < 1):
@@ -18,14 +23,11 @@ if(prod_id < 1):
     exit(-1)
 
 prod_url = "http://api.pouet.net/v1/prod/?id=" + str(prod_id)
-
-datadir = "data/"+str(prod_id)
+datadir = showetdir + "/data/"+str(prod_id)
 prod_download_url = None
 prod_download_filename = None
 prod_json = None
 prod_json_filename = datadir + "/pouet.json"
-
-print("Prod URL: " + prod_url)
 
 # Get the json data:
 if os.path.exists(prod_json_filename):
@@ -41,7 +43,7 @@ else:
         f.write(prod_json)
         f.close()
 
-print(prod_json)
+# print(prod_json)
 
 data = json.loads(prod_json)
 
@@ -60,6 +62,7 @@ except IndexError:
 print("\tType: " + data['prod']['type'])
 print("\tReleased: " + data['prod']['releaseDate'])
 print("\tPlatform: " + prod_platform)
+print("\n")
 
 platorm_runners = [PlatformAmiga(), PlatformWindows()]
 runner = None
@@ -69,7 +72,7 @@ for r in platorm_runners:
         runner = r
 
 if not runner:
-    print("Platform " + prod_platform + " not supported (yet!).")
+    print("ERROR: Platform " + prod_platform + " not supported (yet!).")
     exit(-1)
 
 # Get necessary fields from the data
@@ -118,5 +121,5 @@ else:
 
     open(datadir + "/_FILES_DOWNLOADED", 'a').close()
 
-runner.setup(datadir, prod_platform)
+runner.setup(showetdir, datadir, prod_platform)
 runner.run()

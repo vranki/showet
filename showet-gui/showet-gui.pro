@@ -11,9 +11,13 @@ RESOURCES += \
     qml.qrc
 
 DISTFILES += \
-    main.qml
+    main.qml \
+    ProdDelegate.qml
 
-INSTALLS += target
+desktop.path = /usr/share/applications/
+desktop.files = showet-gui.desktop
+
+INSTALLS += target desktop
 
 HEADERS += \
     showethelper.h
