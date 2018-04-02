@@ -9,6 +9,7 @@ Developed on Ubuntu 17.10, other platforms may work.
 ![Screenshot](screenshot.png?raw=true "Screenshot of the GUI")
 
 ## Idea
+
 * Browse and search demos using pouet.net's database
 * Select a demo, it will be downloaded and set up
 * Easily run the demo natively or using emulator or wine
@@ -70,4 +71,9 @@ base for launching amiga demos.
 - [ ] Whitelist & blacklist of known working & broken demos
 
 Pull requests welcome, although this is still in very early development.
+
+## Authors: 
+
+Code:        Ville Ranki
+Logo & Icon: Manu / Fit 
 
