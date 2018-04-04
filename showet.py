@@ -4,24 +4,32 @@ import os
 import sys
 from platformwindows import PlatformWindows
 from platformamiga import PlatformAmiga
+import argparse
 
-# Note: This is still early proof of concept, but seems to work.
+parser = argparse.ArgumentParser(description='Show a demo on screen.')
+parser.add_argument('pouetid', type=int, nargs='?', help='Pouet ID of the production to show')
+parser.add_argument('--platforms', action="store_true", help='List supported platforms and exit')
 
-if len(sys.argv) != 2:
-    print("Usage: ./showet.py <pouet id>")
-    exit(-1)
+args = parser.parse_args()
+
+platform_runners = [PlatformAmiga(), PlatformWindows()]
+
+if args.platforms:
+    for r in platform_runners:
+        for p in r.supported_platforms():
+            print(p)
+    exit(0)
 
 showetdir = os.path.expanduser("~/.showet")
 
 if not os.path.exists(showetdir):
     os.makedirs(showetdir)
 
-prod_id = int(sys.argv[1])
-
-if(prod_id < 1):
-    print("Invalid prod id!")
+if not args.pouetid:
+    print("No pouet id specified. Use --help to see options.")
     exit(-1)
 
+prod_id = args.pouetid
 prod_url = "http://api.pouet.net/v1/prod/?id=" + str(prod_id)
 datadir = showetdir + "/data/"+str(prod_id)
 prod_download_url = None
@@ -64,10 +72,9 @@ print("\tReleased: " + data['prod']['releaseDate'])
 print("\tPlatform: " + prod_platform)
 print("\n")
 
-platorm_runners = [PlatformAmiga(), PlatformWindows()]
 runner = None
 
-for r in platorm_runners:
+for r in platform_runners:
     if prod_platform in r.supported_platforms():
         runner = r
 
