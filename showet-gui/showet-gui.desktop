@@ -5,5 +5,4 @@ Type=Application
 Terminal=false
 Exec=/usr/bin/showet-gui
 Name=Showet Demo Viewer
-#Icon=/do/it
-
+Icon=showet.svg

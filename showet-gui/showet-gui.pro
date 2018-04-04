@@ -17,7 +17,10 @@ DISTFILES += \
 desktop.path = /usr/share/applications/
 desktop.files = showet-gui.desktop
 
-INSTALLS += target desktop
+icon.path = /usr/share/pixmaps/
+icon.files = ../showet.svg
+
+INSTALLS += target desktop icon
 
 HEADERS += \
     showethelper.h

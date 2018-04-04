@@ -16,32 +16,7 @@ ApplicationWindow {
     property int selectedId: 0
     onSelectedIdChanged: showetHelper.runDemo(selectedId)
 
-    GroupBox {
-        id: headerBox
-        width: parent.width
-        Column {
-            width: parent.width
-            Text {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("SHOWET")
-                font.italic: true
-            }
-            Row {
-                anchors.horizontalCenter: parent.horizontalCenter
-                TextField {
-                    id: searchbox
-                    width: headerBox.width*0.6
-                    placeholderText: qsTr("Pouët search")
-                    Keys.onReturnPressed: startSearch()
-                }
-                Button {
-                    id: searchButton
-                    text: !showet.busy ? qsTr("Search") : qsTr("Cancel")
-                    onClicked: startSearch()
-                }
-            }
-        }
-    }
+    Header { id: headerBox }
     ScrollView {
         anchors.top: headerBox.bottom
         anchors.bottom: parent.bottom
