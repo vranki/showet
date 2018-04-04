@@ -8,6 +8,7 @@ class PlatformCommon:
         self.showetdir = None
         self.datadir = None
         self.prod_platform = None
+        self.prod_files = []
 
 # TODO: Change this to be relative to datadir
     def find_files_recursively(self, path):

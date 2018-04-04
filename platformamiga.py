@@ -6,17 +6,20 @@ class PlatformAmiga(PlatformCommon):
         adfs = self.find_files_with_extension('adf')
         dmss = self.find_files_with_extension('dms')
         exes = self.find_files_with_extension('exe')
+        if len(exes) == 0:
+            exes = self.find_magic_cookies()
+
         if len(dmss) == 0 and len(adfs) == 0 and len(exes) == 0:
-            print("Didn't find any dms, adf or exe files.")
+            print("Didn't find any dms, adf or executable files.")
             exit(-1)
 
         fsuae_opts = '--fullscreen --keep_aspect '
-        drive_0 = None
+        drives = []
         # Support only one for now..
         if len(dmss) > 0:
-            drive_0 = dmss[0]
+            drives = self.sort_disks(dmss)
         elif len(adfs) > 0:
-            drive_0 = adfs[0]
+            drives = self.sort_disks(adfs)
         elif len(exes) > 0:
             fsuae_opts += '--hard_drive_0=. '
             if not os.path.exists(self.datadir + "/s"):
@@ -32,11 +35,17 @@ class PlatformAmiga(PlatformCommon):
         if self.prod_platform == 'amigaocsecs':
             amiga_model = 'A500'
 
-        if self.prod_platform == 'amigaaaga':
+        if self.prod_platform == 'amigaaga':
             fsuae_opts += '--fast_memory=8192 '
-
-        if drive_0:
-            fsuae_opts += '--floppy_drive_0=' + drive_0 + ' '
+# --chip_memory=2048
+        if len(drives) > 0:
+            fsuae_opts += '--floppy_drive_0=' + drives[0] + ' '
+        if len(drives) > 1:
+            fsuae_opts += '--floppy_drive_1=' + drives[1] + ' '
+        if len(drives) > 2:
+            fsuae_opts += '--floppy_drive_2=' + drives[2] + ' '
+        if len(drives) > 3:
+            fsuae_opts += '--floppy_drive_3=' + drives[3] + ' '
 
         fsuae_opts += '--amiga_model=' + amiga_model + ' '
 
@@ -46,3 +55,23 @@ class PlatformAmiga(PlatformCommon):
 
     def supported_platforms(self):
         return ['amigaocsecs', 'amigaaga']
+
+# Input: list of disk images (adf/dms), output: same list sorted by some
+# logic so that first image is first, second disk then etc..
+    def sort_disks(self, files):
+        sorted_list = sorted(files, key=lambda s: s.lower())
+        print("Guessing disk order should be:")
+        print(sorted_list)
+        return sorted_list
+
+# Search demo files for amiga magic cookie (executable file)
+    def find_magic_cookies(self):
+        cookie_files = []
+        for file in self.prod_files:
+            with open(file, "rb") as fin:
+                header = fin.read(4)
+                if len(header) == 4:
+                    # Signature for Amiga magic cookie
+                    if header[0]==0 and header[1]==0 and header[2]==3 and header[3] == 243:
+                        cookie_files.append(file)
+        return cookie_files

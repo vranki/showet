@@ -102,8 +102,10 @@ ApplicationWindow {
 
     function searchClicked() {
         var searchRequest = new XMLHttpRequest();
-        var url = "http://api.pouet.net/v1/search/prod/?q=" + searchbox.text;
-
+        var url = "http://api.pouet.net/v1/search/prod/?q=" + headerBox.searchText
+        if(headerBox.platform.length > 1) {
+            url += "&platform=" + headerBox.platform
+        }
         busy = true
         searchRequest.onreadystatechange=function() {
             if (searchRequest.readyState === XMLHttpRequest.DONE) {
@@ -138,7 +140,9 @@ ApplicationWindow {
                     listElement["group"] = prod["groups"][group]["name"]
                     break
                 }
-                prodList.append(listElement)
+                if(headerBox.platform.length < 2 || headerBox.platform === listElement["platform"]) {
+                    prodList.append(listElement)
+                }
             }
         }
         searchRequest = null
@@ -148,4 +152,6 @@ ApplicationWindow {
     function showInfo(id) {
         Qt.openUrlExternally("http://www.pouet.net/prod.php?which=" + id);
     }
+
+    Component.onCompleted: showetHelper.init()
 }
