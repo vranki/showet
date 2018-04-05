@@ -34,3 +34,12 @@ class PlatformCommon:
     def find_files_with_extension(self, extension):
         foundfiles = [f for f in self.prod_files if (f.lower().endswith(extension) or f.lower().endswith(extension))]
         return foundfiles
+
+# Input: list of disk images, output: same list sorted by some
+# logic so that first image is first, second disk then etc..
+    def sort_disks(self, files):
+        sorted_list = sorted(files, key=lambda s: s.lower())
+        if len(sorted_list) > 1:
+            print("Guessing disk order should be:")
+            print(sorted_list)
+        return sorted_list

@@ -2,8 +2,10 @@
 import urllib.request, json
 import os
 import sys
+from os.path import basename
 from platformwindows import PlatformWindows
 from platformamiga import PlatformAmiga
+from platformcommodore import PlatformCommodore
 import argparse
 
 parser = argparse.ArgumentParser(description='Show a demo on screen.')
@@ -12,7 +14,7 @@ parser.add_argument('--platforms', action="store_true", help='List supported pla
 
 args = parser.parse_args()
 
-platform_runners = [PlatformAmiga(), PlatformWindows()]
+platform_runners = [PlatformAmiga(), PlatformWindows(), PlatformCommodore()]
 
 if args.platforms:
     for r in platform_runners:
@@ -86,26 +88,21 @@ if not runner:
 
 prod_download_url = data['prod']['download']
 prod_download_url = prod_download_url.replace("https://files.scene.org/view", "https://files.scene.org/get")
-prod_download_filename = prod_download_url.split('/')
-prod_download_filename = datadir + "/" +prod_download_filename[len(prod_download_filename)-1]
-
-# Download the prod if needed
-if not prod_download_filename:
-    print("Error: couldn't get filename")
-    exit(-1)
 
 if os.path.exists(datadir + "/_FILES_DOWNLOADED"):
     print("File already downloaded")
 else:
     print("Downloading prod file from " + prod_download_url + "...")
     filedata = urllib.request.urlopen(prod_download_url)
+    filename = os.path.basename(filedata.url)
+    print("Filename: ", filename)
+    prod_download_filename = datadir + "/" + filename
     datatowrite = filedata.read()
 
     with open(prod_download_filename, 'wb') as f:
         f.write(datatowrite)
 
     print("Downloaded ", prod_download_filename)
-
 
     # Decompress the file if needed
     if prod_download_filename.endswith(".zip"):

@@ -14,7 +14,6 @@ ApplicationWindow {
     property bool busy: false
     property var searchRequest: null
     property int selectedId: 0
-    onSelectedIdChanged: showetHelper.runDemo(selectedId)
 
     Header { id: headerBox }
     ScrollView {

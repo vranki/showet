@@ -25,6 +25,7 @@ Depends: ${misc:Depends}, ${python:Depends},
          wine, 
          fs-uae, 
          lhasa,
+         vice,
          qml-module-qtquick-controls,
          qml-module-qtgraphicaleffects,
          qml-module-qtquick-layouts

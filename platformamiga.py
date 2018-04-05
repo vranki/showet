@@ -56,14 +56,6 @@ class PlatformAmiga(PlatformCommon):
     def supported_platforms(self):
         return ['amigaocsecs', 'amigaaga']
 
-# Input: list of disk images (adf/dms), output: same list sorted by some
-# logic so that first image is first, second disk then etc..
-    def sort_disks(self, files):
-        sorted_list = sorted(files, key=lambda s: s.lower())
-        print("Guessing disk order should be:")
-        print(sorted_list)
-        return sorted_list
-
 # Search demo files for amiga magic cookie (executable file)
     def find_magic_cookies(self):
         cookie_files = []

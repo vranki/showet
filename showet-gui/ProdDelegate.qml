@@ -16,7 +16,11 @@ Row {
     Button {
         id: runButton
         text: "Run"
-        onClicked: selectedId = id
+        enabled: !showetHelper.running
+        onClicked:  {
+            selectedId = id
+            showetHelper.runDemo(selectedId)
+        }
     }
     Button {
         text: "Nfo"
