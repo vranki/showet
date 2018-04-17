@@ -13,42 +13,21 @@ Developed on Ubuntu 17.10, other platforms may work.
 * Browse and search demos using pouet.net's database
 * Select a demo, it will be downloaded and set up
 * Easily run the demo natively or using emulator or wine
-* Support at least windows .exe (wine), Amiga (UAE), C64 (Vice) demos
+* Support at least linux, windows .exe (wine), Amiga (UAE), C64 (Vice) demos
 * Smart autodetection as far as possible
 * Support per-demo metadata to define how it should be run if autodetection fails
 
 ## Current implementation
-* Proof of concept python script that can download & run demos
-* Supported platforms: windows .exe, Amiga (.adf, .dms, .lha)
-* Qt based GUI frontend
+* Python script that can download & run demos
+* Supported platforms: windows .exe, Amiga (.adf, .dms, .lha), C64 (.prg, .d64)
+* GUI frontend
 
 ## Usage
 
-* Install the debian package (hopefully available in github releases).
+* Install the debian package (available in github releases page)
 * Launch showet from menu
 * Search for a production and click run to run it
 * Alt-F4 quits from emulators
-
-## Command line examples
-
-Windows: MFX's Deities (http://www.pouet.net/prod.php?which=24487) 
-```
-./showet 24487
-```
-Amiga/dms Origin by Complex (http://www.pouet.net/prod.php?which=3741)
-```
-./showet 3741
-```
-Amiga/lha Tint by TBL (http://www.pouet.net/prod.php?which=701)
-```
-./showet 701
-```
-
-To build debian package, run:
-```
-debuild -us -uc -b
-```
-Install the package to get dependencies.
 
 ### Amiga Notes ###
 
@@ -71,6 +50,8 @@ the source tarball.
 You can configure vice / x64 any way you want. Showet starts it
 with -fullscreen by default
 
+Use Alt-N to cycle disk sides for multi-disk demos.
+
 ## Todo
 
 - [x] Proof of concept
@@ -87,7 +68,36 @@ with -fullscreen by default
 - [x] debian packaging
 - [ ] Whitelist & blacklist of known working & broken demos
 
-Pull requests welcome, although this is still in very early development.
+Pull requests welcome.
+
+## Command line examples
+
+You can use the command line tool to quickly test running any demos.
+
+Windows: MFX's Deities (http://www.pouet.net/prod.php?which=24487) 
+```
+./showet.py 24487
+```
+Amiga/dms Origin by Complex (http://www.pouet.net/prod.php?which=3741)
+```
+./showet.py 3741
+```
+Amiga/lha Tint by TBL (http://www.pouet.net/prod.php?which=701)
+```
+./showet.py 701
+```
+C64/.d64 Comaland by Censor Design & Oxyron (http://www.pouet.net/prod.php?which=64283)
+```
+./showet.py 64283
+```
+
+To build debian package, run:
+```
+debuild -us -uc -b
+```
+[![asciicast](https://asciinema.org/a/sXH854ysSs5Ya5C9EGRQB0TzV.png)](https://asciinema.org/a/sXH854ysSs5Ya5C9EGRQB0TzV)
+
+Install the package to get dependencies.
 
 ## Authors: 
 

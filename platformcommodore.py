@@ -15,10 +15,15 @@ class PlatformCommodore(PlatformCommon):
 
 
         vice_opts = "-fullscreen "
+        flipfile = self.datadir + "/fliplist.vfl"
+        with open(flipfile, "w") as f:
+            f.write("UNIT 8\n")
+            for disk in d64s:
+                f.write(disk + "\n")
 
         if len(d64s) > 0:
             d64s = self.sort_disks(d64s)
-            vice_opts = vice_opts + d64s[0]
+            vice_opts = vice_opts + " -flipname " + flipfile + " " + d64s[0]
 
         if len(prgs) > 0:
             vice_opts = vice_opts + prgs[0]
@@ -35,7 +40,6 @@ class PlatformCommodore(PlatformCommon):
         d64_files = []
         for file in self.prod_files:
             size = os.path.getsize(file)
-            print("File size:", size)
             if size == 174848: # All d64:s seem to be this size..
                 d64_files.append(file)
         return d64_files
