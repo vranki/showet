@@ -6,6 +6,7 @@ from os.path import basename
 from platformwindows import PlatformWindows
 from platformamiga import PlatformAmiga
 from platformcommodore import PlatformCommodore
+from platformlinux import PlatformLinux
 import argparse
 
 parser = argparse.ArgumentParser(description='Show a demo on screen.')
@@ -14,7 +15,8 @@ parser.add_argument('--platforms', action="store_true", help='List supported pla
 
 args = parser.parse_args()
 
-platform_runners = [PlatformAmiga(), PlatformWindows(), PlatformCommodore()]
+# In priority order
+platform_runners = [PlatformLinux(), PlatformAmiga(), PlatformCommodore(), PlatformWindows()]
 
 if args.platforms:
     for r in platform_runners:
@@ -57,12 +59,27 @@ else:
 
 data = json.loads(prod_json)
 
-platforms = data['prod']['platforms'].values()
-
-# Just pick one:
 prod_platform = None
-for p in platforms:
-    prod_platform = p['slug']
+
+runner = None
+
+platforms = []
+for p in data['prod']['platforms'].values():
+    platforms.append(p['slug'])
+
+
+for prunner in platform_runners:
+    for demoplat in platforms:
+        if prod_platform is None and demoplat in prunner.supported_platforms():
+            prod_platform = demoplat
+            runner = prunner
+
+if not runner:
+    print("ERROR: Platform " + platforms + " not supported (yet!).")
+    exit(-1)
+
+if len(platforms) > 1:
+    print("Demo supports platform platforms ", platforms, "of which", prod_platform, "rules the most.")
 
 print("\tName: " + data['prod']['name'])
 try:
@@ -74,15 +91,6 @@ print("\tReleased: " + data['prod']['releaseDate'])
 print("\tPlatform: " + prod_platform)
 print("\n")
 
-runner = None
-
-for r in platform_runners:
-    if prod_platform in r.supported_platforms():
-        runner = r
-
-if not runner:
-    print("ERROR: Platform " + prod_platform + " not supported (yet!).")
-    exit(-1)
 
 # Get necessary fields from the data
 
@@ -95,6 +103,9 @@ else:
     print("Downloading prod file from " + prod_download_url + "...")
     filedata = urllib.request.urlopen(prod_download_url)
     filename = os.path.basename(filedata.url)
+    if len(filename) == 0:
+        print("Error downloading file at ", prod_download_url)
+        exit(-1)
     print("Filename: ", filename)
     prod_download_filename = datadir + "/" + filename
     datatowrite = filedata.read()
@@ -122,6 +133,19 @@ else:
             os.remove(prod_download_filename)
         else:
             print("Unzipping file failed!")
+
+    if prod_download_filename.endswith(".tar.xz") \
+            or prod_download_filename.endswith(".tar.gz") \
+            or prod_download_filename.endswith(".tgz") \
+            or prod_download_filename.endswith(".tar_gz") \
+            :
+        print("Extracting tarball ", prod_download_filename)
+        ret = os.system("tar xvf " + prod_download_filename + " -C " + datadir)
+        if ret == 0:
+            # Delete the original file
+            os.remove(prod_download_filename)
+        else:
+            print("Extracting file failed!")
 
     open(datadir + "/_FILES_DOWNLOADED", 'a').close()
 
