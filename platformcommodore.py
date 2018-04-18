@@ -13,8 +13,9 @@ class PlatformCommodore(PlatformCommon):
             print("Didn't find any d64 or prg files.")
             exit(-1)
 
+        runcommand = ['x64']
+        runcommand.append('-fullscreen')
 
-        vice_opts = "-fullscreen "
         flipfile = self.datadir + "/fliplist.vfl"
         with open(flipfile, "w") as f:
             f.write("UNIT 8\n")
@@ -23,14 +24,12 @@ class PlatformCommodore(PlatformCommon):
 
         if len(d64s) > 0:
             d64s = self.sort_disks(d64s)
-            vice_opts = vice_opts + " -flipname " + flipfile + " " + d64s[0]
+            runcommand = runcommand + ['-flipname', flipfile, d64s[0]]
 
         if len(prgs) > 0:
-            vice_opts = vice_opts + prgs[0]
+            runcommand.append(prgs[0])
 
-        print("Running x64 with options: " + vice_opts)
-        os.chdir(self.datadir)
-        os.system('x64 ' + vice_opts)
+        self.run_process(runcommand)
 
     def supported_platforms(self):
         return ['commodore64']

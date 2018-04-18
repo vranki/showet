@@ -28,7 +28,7 @@ GroupBox {
             }
             Button {
                 id: searchButton
-                text: !showet.busy ? qsTr("Search") : qsTr("Cancel")
+                text: !showet.searchInProgress ? qsTr("Search") : qsTr("Cancel")
                 onClicked: startSearch()
             }
             Text {

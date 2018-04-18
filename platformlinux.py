@@ -13,9 +13,10 @@ class PlatformLinux(PlatformCommon):
         os.chdir(self.datadir)
         if len(exes) > 1:
             print("Found executables: ", exes, " - not sure which one to run!")
+            exit(-1)
         else:
             print("Running ", exes[0])
-        os.system(exes[0])
+            self.run_process([exes[0]])
 
     def supported_platforms(self):
         return ['linux']

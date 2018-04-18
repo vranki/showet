@@ -75,7 +75,7 @@ for prunner in platform_runners:
             runner = prunner
 
 if not runner:
-    print("ERROR: Platform " + platforms + " not supported (yet!).")
+    print("ERROR: Platform " + str(platforms) + " not supported (yet!).")
     exit(-1)
 
 if len(platforms) > 1:

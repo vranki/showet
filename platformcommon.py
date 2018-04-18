@@ -1,5 +1,6 @@
 import os
 import os.path
+import subprocess
 
 class PlatformCommon:
     prod_files = []
@@ -43,3 +44,15 @@ class PlatformCommon:
             print("Guessing disk order should be:")
             print(sorted_list)
         return sorted_list
+
+    def run_process(self, arguments):
+        print("Running command: ", arguments)
+        process = subprocess.Popen(arguments, cwd=self.datadir, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        process.wait()
+        retcode = process.returncode
+        for line in process.stdout:
+            print(line.decode('utf-8'))
+        if retcode:
+            print(arguments[0], "process exited with ", retcode)
+            exit(-1)
+        return retcode

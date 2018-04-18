@@ -28,6 +28,7 @@ Depends: ${misc:Depends}, ${python:Depends},
          vice,
          qml-module-qtquick-controls,
          qml-module-qtgraphicaleffects,
-         qml-module-qtquick-layouts
+         qml-module-qtquick-layouts,
+         qml-module-qtwebengine
 Description: pouet.net demo jukebox
  Play demos from pouet.net easily.

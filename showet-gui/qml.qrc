@@ -4,5 +4,8 @@
         <file>ProdDelegate.qml</file>
         <file>../showet-logo.png</file>
         <file>Header.qml</file>
+        <file>SearchView.qml</file>
+        <file>BrowserView.qml</file>
+        <file>LoadingOverlay.qml</file>
     </qresource>
 </RCC>

@@ -27,11 +27,7 @@ class PlatformWindows(PlatformCommon):
             print("Creating wine prefix: " + str(wineprefix))
             os.system('WINEARCH="win32" winecfg')
 
-        # Run the demo
-
-        print("Running " + exepath + "...")
-        os.chdir(self.datadir)
-        os.system('wine ' + exefile)
+        self.run_process(['wine', exefile])
 
     def supported_platforms(self):
         return ['windows']

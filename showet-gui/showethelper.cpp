@@ -24,6 +24,12 @@ void ShowetHelper::runDemo(const unsigned int id) {
     m_showetProcess.start(m_showetBinary.fileName(), args);
 }
 
+void ShowetHelper::cancelDemo()
+{
+    if(!m_running) return;
+    m_showetProcess.kill();
+}
+
 void ShowetHelper::init() {
     m_showetBinary.setFileName("../showet.py"); // In dev environment
     if(!m_showetBinary.exists()) {

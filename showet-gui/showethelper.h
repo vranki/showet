@@ -17,13 +17,13 @@ class ShowetHelper : public QObject
 public:
     explicit ShowetHelper(QObject *parent = nullptr);
     Q_INVOKABLE void runDemo(const unsigned int id);
+    Q_INVOKABLE void cancelDemo();
     Q_INVOKABLE void init(); // Sets up stuff
+
 signals:
     void runError(QString errorText);
     void runningChanged(bool running);
     void supportedPlatformsChanged();
-
-public slots:
 
 private slots:
     void processFinished(int exitCode, QProcess::ExitStatus exitStatus);

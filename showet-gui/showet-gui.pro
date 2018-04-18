@@ -1,4 +1,4 @@
-QT += quick
+QT += quick webengine
 CONFIG += c++11
 TARGET = showet-gui
 target.path = /usr/bin
@@ -12,7 +12,11 @@ RESOURCES += \
 
 DISTFILES += \
     main.qml \
-    ProdDelegate.qml
+    ProdDelegate.qml \
+    SearchView.qml \
+    Header.qml \
+    BrowserView.qml \
+    LoadingOverlay.qml
 
 desktop.path = /usr/share/applications/
 desktop.files = showet-gui.desktop
